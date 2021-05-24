@@ -17,7 +17,7 @@ contract VoteShim {
         }
     }
 
-    function computeVote(address delegatee, uint32 nCheckpoints, uint96 oldVotes, uint96 newVotes) external returns (uint96 computedVotes) {
+    function computeVote(address srcRep, address dstRep, uint96 newVotes) external returns (uint96 computedVotes) {
         computedVotes = sqrt96(newVotes);
         emit VoteWeight(delegatee, computedVotes);
     }

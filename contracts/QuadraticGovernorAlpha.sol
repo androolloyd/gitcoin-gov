@@ -8,7 +8,7 @@ interface IProofOfHumanity {
         bool registered
     );
 }
-contract QuadraticQuadraticGovernorAlpha {
+contract QuadraticGovernorAlpha {
     string public constant name = "Quadratic Governor Alpha";
 
     function quorumVotes() public pure returns (uint) { return 400000e18; } // 400,000 = 4% of Comp
@@ -243,9 +243,7 @@ contract QuadraticQuadraticGovernorAlpha {
         Proposal storage proposal = proposals[proposalId];
         Receipt storage receipt = proposal.receipts[voter];
         require(receipt.hasVoted == false, "QuadraticGovernorAlpha::_castVote: voter already voted");
-        /* insert quadratic votes */
-        uint96 votes = comp.getPriorVotes(voter, proposal.startBlock);
-        /* end quadratic votes */
+        uint96 votes = comp.getPriorVotes(voter, proposal.startBlock); //vote sums are quadratic already
 
         if (support) {
             proposal.forVotes = add256(proposal.forVotes, votes);
